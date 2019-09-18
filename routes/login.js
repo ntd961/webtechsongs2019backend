@@ -1,14 +1,16 @@
 const express = require('express');
 const bodyParser =  require('body-parser');
 const router = express.Router();
+const cors = require('cors');
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded());
+router.use(cors());
 
 router.post('/login', (req, res)=> {
     let username = req.body.username;
     let password = req.body.password;
-    console.log(username);
+    console.log(req.body);
     if (username && password){
         let users = [
             {
@@ -37,6 +39,10 @@ router.post('/login', (req, res)=> {
     }else {
         res.status(400).send('Daten nicht korrekt');
     }
+
+});
+router.get('logout', function (req, res, next) {
+
 });
 
 module.exports = router;
